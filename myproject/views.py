@@ -1,3 +1,4 @@
+import django
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -15,4 +16,7 @@ def contact(request):
     return render(request, template_name='contact.html', context=context)
 
 def hello(request):
-    return HttpResponse("Hello from Django 5.2.7!")
+    context = {
+        'django_version':  django.get_version(),
+    }
+    return render(request, template_name='welcome.html', context=context)
