@@ -1,0 +1,84 @@
+{% load static %}
+<style>
+    .banner {
+        /* 1. Ensure full width */
+        width: 100%;
+
+        /* 2. Set the background color */
+        background-color: #007bff; /* Example color: a bright blue */
+
+        /* Optional: Add height/padding to make the banner visible */
+        padding: 20px 0; /* 20px top/bottom padding, 0 left/right */
+
+        /* Optional: Set text color for readability */
+        color: white;
+
+        /* Optional: Center the text */
+        text-align: center;
+
+        /* FLEXBOX PROPERTIES */
+        display: flex; /* 1. Enable flex layout */
+        justify-content: space-between; /* 2. Push children (logo/name) to the edges */
+        align-items: center; /* 3. Vertically center the items */
+    }
+
+    .banner h1 {
+        margin: 0; /* Remove default margin on the heading */
+        font-size: 2em;
+    }
+
+    /* * INNER FLEX CONTAINER (To apply horizontal spacing consistently)
+         */
+    .banner-content {
+        display: flex; /* Allows us to put the logo and name containers side-by-side */
+        width: 100%;
+        max-width: 1200px; /* Optional: Set a maximum width for inner content */
+        margin: 0 auto; /* Center the content within the 100% wide banner */
+        padding: 0 20px; /* Add horizontal spacing from the edges */
+        box-sizing: border-box;
+    }
+
+    /* * LEFT COLUMN: Logo
+     */
+    .logo-container {
+        /* Takes the left space */
+        flex-grow: 0; /* Do not grow */
+    }
+
+    .logo {
+        /* Placeholder styling for an image/icon */
+        height: 40px;
+        width: 40px;
+        background-color: #ffaa00; /* Example logo color */
+        border-radius: 5px;
+        display: block; /* Important for spacing */
+    }
+
+    /* RIGHT COLUMN: Company Name */
+    .company-name-container {
+        /* Pushed to the right by justify-content: space-between */
+        text-align: right;
+        align-items: center;
+    }
+
+    .company-name-container h1 {
+        margin: 0; /* Remove default h1 margin */
+        font-size: 1.8em;
+        font-weight: 300; /* Lighter font weight for a sleek look */
+    }
+</style>
+<div class="banner">
+    <div class="banner-content">
+
+        <div class="logo-container">
+            <div title="Thanh Binh Restaurant">
+                <img src="{% static 'img/logo.png' %}" alt="Cambridge Thanh Binh Restaurant"/>
+            </div>
+        </div>
+
+        <div class="company-name-container">
+            <h1>Welcome to Data Management Studio Limited</h1>
+        </div>
+
+    </div>
+</div>
