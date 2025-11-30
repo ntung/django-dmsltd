@@ -28,6 +28,14 @@ def httpobjects(request):
     # return render(request, 'home.html', {'name': 'Rahul'})
 
 
-def menu(request):
-    content = "<h1 style='color: green'>My Menu</h1>"
+def services(request):
+    content = "<h1 style='color: green'>Our Services</h1>"
+    content += "<ul>"
+    content += "<li>Web Development</li>"
+    content += "<li>Mobile App Development</li>"
+    content += "<li>Data Analysis</li>"
+    content += "<li>Cloud Solutions</li>"
+    content += "</ul>"
+    content += "<p>Contact us for more information about our services.</p>" 
+    content += "<p><a href='/httpobjects'>Creating Requests and Responses</a></p>"
     return HttpResponse(content)
