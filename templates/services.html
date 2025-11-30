@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%  include "_head.html" %}
+    <title>Services | DMS Ltd.</title>
+</head>
+<body>
+    {% include '_navbar.html' %}
+    {% if selected_slug is None %}
+    <h1 style='color: rgb(14, 96, 227)'>Our Services</h1>
+    <ul>
+        {% for slug, name in services_list.items %}
+        <li><a href="{{ slug }}">{{ name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% elif selected_slug in services %}
+    <h1 style='color: rgb(14, 96, 227)'>Service Details</h1>
+    <h2>{{ selected_service.title }}</h2>
+    <p>{{ selected_service.description }}</p>
+    {% else %}
+    <h1 style='color: rgb(14, 96, 227)'>Service Not Found</h1>
+    <p>The requested service "{{ selected_slug }}" does not exist. 
+        Please check the URL and try again.</p>
+    {% endif %}
+</body>
+</html>

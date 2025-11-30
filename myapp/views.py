@@ -30,16 +30,16 @@ def httpobjects(request):
 
 def services(request, slug=None):
     def all_services():
-        content = "<h1 style='color: green'>Our Services</h1>"
-        content += "<ul>"
-        content += "<li><a href='/services/web-development'>Web Development</a></li>"
-        content += "<li><a href='/services/mobile-app-development'>Mobile App Development</a></li>"
-        content += "<li><a href='/services/data-analysis'>Data Analysis</a></li>"
-        content += "<li><a href='/services/cloud-solutions'>Cloud Solutions</a></li>"
-        content += "</ul>"
-        content += "<p>Contact us for more information about our services.</p>"
-        content += "<p><a href='/httpobjects'>Creating Requests and Responses</a></p>"
-        return content
+        _list = {
+            '/services/web-development': 'Web Development',
+            '/services/mobile-app-development': 'Mobile App Development',
+            '/services/data-analysis': 'Data Analysis',
+            '/services/cloud-solutions': 'Cloud Solutions'
+        }
+    
+        # content += "<p>Contact us for more information about our services.</p>"
+        # content += "<p><a href='/httpobjects'>Creating Requests and Responses</a></p>"
+        return _list
 
     services_info = {
         'web-development': 'We offer cutting-edge web development services using the latest technologies.',
@@ -47,15 +47,24 @@ def services(request, slug=None):
         'data-analysis': 'We provide comprehensive data analysis services to help you make informed decisions.',
         'cloud-solutions': 'Our cloud solutions ensure scalability, security, and efficiency for your business.'
     }
+    selected_service = None
+    content = None
+
     if slug is None:
         content = all_services()
     elif slug in services_info:
-        content = "<h1>Service Details</h1>"
-        content += f"<h2>{slug.replace('-', ' ').title()}</h2>"
-        content += f"<p>{services_info[slug]}</p>"
+        selected_service = {
+            'slug': slug,
+            'title': slug.replace('-', ' ').title(),
+            'description': services_info[slug]
+        }
     else:
-        content = "<h1>Service Not Found</h1>"
-        content += "<p>The requested service does not exist. Please check the URL and try again.</p>"
+        pass  # Could handle unknown service slug here
 
-    return HttpResponse(content)
-    # return render(request, 'services.html', {'services': services_info, 'selected_service': slug})
+    # return HttpResponse(content)
+    context = {
+        'services': services_info, 'content': content, 
+        'selected_slug': slug, 'selected_service': selected_service, 
+        'services_list': all_services()
+    }
+    return render(request, template_name='services.html', context=context)
