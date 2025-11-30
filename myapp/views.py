@@ -28,31 +28,34 @@ def httpobjects(request):
     # return render(request, 'home.html', {'name': 'Rahul'})
 
 
-def services(request):
-    content = "<h1 style='color: green'>Our Services</h1>"
-    content += "<ul>"
-    content += "<li><a href='/service/web-development'>Web Development</a></li>"
-    content += "<li><a href='/service/mobile-app-development'>Mobile App Development</a></li>"
-    content += "<li><a href='/service/data-analysis'>Data Analysis</a></li>"
-    content += "<li><a href='/service/cloud-solutions'>Cloud Solutions</a></li>"
-    content += "</ul>"
-    content += "<p>Contact us for more information about our services.</p>" 
-    content += "<p><a href='/httpobjects'>Creating Requests and Responses</a></p>"
-    return HttpResponse(content)
+def services(request, slug=None):
+    def all_services():
+        content = "<h1 style='color: green'>Our Services</h1>"
+        content += "<ul>"
+        content += "<li><a href='/services/web-development'>Web Development</a></li>"
+        content += "<li><a href='/services/mobile-app-development'>Mobile App Development</a></li>"
+        content += "<li><a href='/services/data-analysis'>Data Analysis</a></li>"
+        content += "<li><a href='/services/cloud-solutions'>Cloud Solutions</a></li>"
+        content += "</ul>"
+        content += "<p>Contact us for more information about our services.</p>"
+        content += "<p><a href='/httpobjects'>Creating Requests and Responses</a></p>"
+        return content
 
-def servicedetails(request, service_slug=None):
     services_info = {
         'web-development': 'We offer cutting-edge web development services using the latest technologies.',
         'mobile-app-development': 'Our mobile app development team creates user-friendly and high-performance apps.',
         'data-analysis': 'We provide comprehensive data analysis services to help you make informed decisions.',
         'cloud-solutions': 'Our cloud solutions ensure scalability, security, and efficiency for your business.'
     }
-    if service_slug in services_info:
+    if slug is None:
+        content = all_services()
+    elif slug in services_info:
         content = "<h1>Service Details</h1>"
-        content += f"<h2>{service_slug.replace('-', ' ').title()}</h2>"
-        content += f"<p>{services_info[service_slug]}</p>"
+        content += f"<h2>{slug.replace('-', ' ').title()}</h2>"
+        content += f"<p>{services_info[slug]}</p>"
     else:
         content = "<h1>Service Not Found</h1>"
         content += "<p>The requested service does not exist. Please check the URL and try again.</p>"
 
     return HttpResponse(content)
+    # return render(request, 'services.html', {'services': services_info, 'selected_service': slug})
