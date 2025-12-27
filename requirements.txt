@@ -1,0 +1,4 @@
+python-decouple>=3.8
+Django>=5.2
+# mysqlclient>=2.2.7
+mysql-connector-python>=9.5.0
