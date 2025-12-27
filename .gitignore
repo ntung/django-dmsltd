@@ -1,1 +1,15 @@
-*/__pycache__/*
+myapp/migrations/__pycache__/*
+db.sqlite3
+media/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+*.pot
+*.mo
+.DS_Store
+.env
+.idea/
+.vscode/
+__pycache__/
