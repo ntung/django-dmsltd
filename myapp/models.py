@@ -9,3 +9,19 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.name + " : " + self.cuisine + " - $" + str(self.price)
+
+
+class DrinkCategory(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Drink(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(DrinkCategory, on_delete=models.PROTECT, default=None)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.name + " (" + self.category.name + ") - $" + str(self.price)
