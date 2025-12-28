@@ -5,4 +5,5 @@ urlpatterns = [
     path('httpobjects/', views.httpobjects, name='httpobjects'),
     path('services/', views.services, name='services'),
     path('services/<str:slug>', views.services, name='services'),
+    path('booking/', views.booking, name='booking'),
 ]

@@ -25,3 +25,16 @@ class Drink(models.Model):
 
     def __str__(self):
         return self.name + " (" + self.category.name + ") - $" + str(self.price)
+
+
+class Booking(models.Model):
+    customer_name = models.CharField(max_length=100)
+    customer_email = models.EmailField()
+    customer_phone = models.CharField(max_length=20)
+    booking_date = models.DateField()
+    booking_time = models.TimeField()
+    number_of_people = models.PositiveIntegerField()
+    comments = models.TextField(max_length=1000, blank=True, null=True)
+
+    def __str__(self):
+        return f"Booking for {self.customer_name} on {self.booking_date} at {self.booking_time} for {self.number_of_people} people"

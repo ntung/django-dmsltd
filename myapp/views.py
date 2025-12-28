@@ -1,7 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from myapp.forms import BookingForm
+
 # Create your views here.
+def booking(request):
+    form = BookingForm()
+    if request.method == 'POST':
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = BookingForm()  # Reset the form after saving the data
+    context = {'form': form}
+    return render(request, template_name='booking.html', context=context)
+
+
 def httpobjects(request):
     path = request.path
     scheme = request.scheme
